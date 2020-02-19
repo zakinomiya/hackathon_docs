@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+        .container {
+            display: flex;
+            align-items: center;
+        }
+        .abi-list {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p>現在のアカウント：</p>
+        <p id="account-display"></p>
+    </div>
+    <div class="container contract-input">
+        <input placeholder="コントラクトID" id='contract-id'/>
+        <button id="fetch-contract-button" value="" type="text">コントラクトを探す</button>
+    </div>
+    <div class="container" id="contract-info" ></div>
+    <div class="container" id="storage-display" ></div>
+</body>
+<script type="text/javascript" src="./dist/bundle.js"></script>
+
+</html>
