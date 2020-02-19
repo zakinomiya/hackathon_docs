@@ -16,7 +16,7 @@ IOST JavaScript SDKでよく使うのは
 
 ```javascript
     // iost.jsの読み込み
-    import IOST from "iost"
+    const IOST = require("iost")
 
     // IOSTインスタンスの初期化
     const iost = new IOST.IOST()
