@@ -18,14 +18,10 @@ IOST JavaScript SDKでよく使うのは
     // iost.jsの読み込み
     const IOST = require("iost")
 
-    // IOSTインスタンスの初期化
-    const iost = new IOST.IOST()
-
     // RPCインスタンスの初期化（テストネット用）
     // これでテストネットのIOSTネットワークから
     // 情報を読み取ったりできるように設定しています。
     const rpc = new IOST.RPC(new IOST.HTTPProvider("http://13.52.105.102:30001"))
-    iost.setRPC(rpc)
 
     // 拡張機能の読み込み
     const iwallet = window.IWalletJS
@@ -34,7 +30,8 @@ IOST JavaScript SDKでよく使うのは
     // IOSTクラスのインスタンスを返す
     const loadAccount = async () => {
         const account = await iwallet.enable()
-        iost = iwallet.newIOST(IOST)
+        const iost = iwallet.newIOST(IOST)
+        iost.setRPC(rpc)
         return iost.setAccount(account)
     }
 
