@@ -14,7 +14,7 @@
             "name": "hello",
             "args": [
                 "string",
-                "string"
+                "string",
             ],
             "amountLimit": [],
             "description": ""

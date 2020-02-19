@@ -5,7 +5,7 @@ IOSTのスマートコントラクトでは専用のAPIを使用できます。
 よく使うAPIをとりあえず並べてみました。
 
 全APIの一覧はここにあります
-https://developers.iost.io/docs/en/3-smart-contract/IOST-Blockchain-API.html
+[IOSTスマートコントラクトAPI一覧](https://developers.iost.io/docs/en/3-smart-contract/IOST-Blockchain-API.html)
 
 ## コントラクト内のデータを操作したい
 
@@ -26,18 +26,17 @@ https://developers.iost.io/docs/en/3-smart-contract/IOST-Blockchain-API.html
 #### 似ているAPI
 
 del、mapDel　→　削除
+
 has、mapHas　→　キーが存在するか確認
 
 ## トークンを送信したい
 
-
-| 引数	| 型 | 説明 |
+| 引数 | 型 | 説明 |
 | :----: | :------ |:------ |
 | from | string | 送信元 |
 | to | string | 送信先 |
 | amount | string | 量 |
 | memo | string | メモ |
-
 
 ```javascript
 
@@ -49,9 +48,12 @@ has、mapHas　→　キーが存在するか確認
 #### 似ているAPI
 
 deposit　→　コントラクトにトークンを預ける
+
 withdraw　→　コントラクトからトークンを引き出す
 
 ## 誰がトランザクションを呼び出したか確認したい
+
+データに対して所有者をもたせたいときなど便利です
 
 ```javascript
 
@@ -61,16 +63,14 @@ withdraw　→　コントラクトからトークンを引き出す
 
 ## 誰がコントラクトのオーナーか確認したい
 
-
 ```javascript
-
     const owner = blockchain.contractOwner()
     // owner = 'account1'
 ```
 
 ## 別のコントラクトを呼び出したい
 
-| 引数	| 型 | 説明 |
+| 引数 | 型 | 説明 |
 | :----: | :------ |:------ |
 | contract | string | コントラクトID |
 | abi | string | |
@@ -88,16 +88,56 @@ withdraw　→　コントラクトからトークンを引き出す
 
 ## コントラクトの実行に認証をかけたい
 
-認証（requireAuth）
+IOSTにはアカウントに権限をつけることができます
+トランザクション実行者が権限を持っているか確認できます
+
+| 引数 | 型 | 説明 |
+| :----: | :------ |:------ |
+| account | string |  |
+| permission | string | |
+
+```javascript
+const isAuthorized = blockchain.requireAuth('account1', 'active');
+if (isAuthorized !== true) {
+    throw new Error(" unauthoirzed! ");
+}
+```
 
 ## 現在のブロック情報を確認したい
 
-ブロック(block)
+スマートコントラクトではグローバルでblock変数を参照できます
+内容は以下です
+
+```javascript
+{
+    time: 1541541540000000000, // nano second
+    hash: "4mBbjkCYJQZz7hGSdnRKCLgGEkuhen1FCb6YDD7oLmtP",
+    expiration: 1541541540010000000, // nano second
+    gas_limit: 100000,
+    gas_ratio: 100,
+    auth_list: {"IOST4wQ6HPkSrtDRYi2TGkyMJZAB3em26fx79qR3UJC7fcxpL87wTn":2},
+    publisher: "user0"
+}
+```
 
 ## 現在のトランザクション情報を確認したい
 
-トランザクション(tx)
+```javascript
+{
+    number: 132,
+    parent_hash: "4mBbjkCYJQZz7hGSdnRKCLgGEkuhen1FCb6YDD7oLmtP",
+    witness: "IOST4wQ6HPkSrtDRYi2TGkyMJZAB3em26fx79qR3UJC7fcxpL87wTn",
+    time: 1541541540000000000 // nano second
+}
+```
 
-## 暗号を使用したい
+## 使えないJavaScriptの文法
 
-## Crypto
+```javascript
+    const [a, b, c] = [1, 2, 3]
+    const {d, e, f} = {d: 'd', e: 'e', f: 'f'}
+```
+
+JavaScriptでよく使われる上記のような配列や連想配列の分割代入、
+正規表現はIOSTでは使用できません
+アロー関数も使用できません

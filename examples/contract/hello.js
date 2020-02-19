@@ -4,10 +4,11 @@ class HelloWorld {
     }
 
     can_update(data) {
-        return blockchain.requireAuth(blockchain.contractOwner(), "active");
+        return blockchain.requireAuth(blockchain.contractOwner(), "active")
     }
 
     /**
+     * 
      * @param {string} name 
      * @param {string} countryName 
      */
@@ -44,24 +45,24 @@ class HelloWorld {
     }
 
     _put(k,v){
-        const value = JSON.stringify(v);
-        storage.put(k, value);
+        const value = JSON.stringify(v)
+        storage.put(k, value)
     }
 
     _get(k){
-        const v = storage.get(k);
-        return JSON.parse(v);
+        const v = storage.get(k)
+        return JSON.parse(v)
     }
 
     _mapGet(k, f){
-     const v = storage.mapGet(k, f);
-     const value = JSON.parse(v);
-     return value;   
+     const v = storage.mapGet(k, f)
+     const value = JSON.parse(v)
+     return value   
     }
 
     _mapPut(k, f, v){
-        const value = JSON.stringify(v);
-        storage.mapPut(k, f, value);
+        const value = JSON.stringify(v)
+        storage.mapPut(k, f, value)
     }
 
 }

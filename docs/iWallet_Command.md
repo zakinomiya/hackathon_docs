@@ -61,7 +61,6 @@ The contract id is: Contract4DNFSzRJFvgdau4CW8AM2x7X2AA1q8iX33YNKrBMYAAc
 </br>
 アップデート用コードは。。。を参照してください
 
-
 ```command
 例）iwallet publish -a tutorial1 -s 13.52.105.102:30002 --chain_id 1023 -u <JS FILE> <ABI FILE> <CONTRACT ID>
 
@@ -117,7 +116,7 @@ $ iwallet receipt -s 13.52.105.102:30002 --chain_id 1023 AyFmF2E1RQ3RC8m8UnrpSke
 \<FIELD>はmapPutで保存した場合のフィールドの名前を指定するときに使います。
 
 ```command
-例1）iwallet table -s 13.52.105.102:30002 --chain_id 1023 <CONTRACT ID> <KEY> 
+例1）iwallet table -s 13.52.105.102:30002 --chain_id 1023 <CONTRACT ID> <KEY>
 例2）iwallet table -s 13.52.105.102:30002 --chain_id 1023 <CONTRACT ID> <KEY> <FIELD>
 
 $ iwallet table -s 13.52.105.102:30002 --chain_id 1023 Contract4DNFSzRJFvgdau4CW8AM2x7X2AA1q8iX33YNKrBMYAAc 'lastPerson'

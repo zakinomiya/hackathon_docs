@@ -21,7 +21,7 @@ $ go get github.com/iost-official/go-iost/cmd/iwallet
 でiwalletコマンドラインツールをインストール
 
 ```command
-$ iwallet 
+$ iwallet
 ```
 
 コマンドを打ってみてインストールできているか確認する
