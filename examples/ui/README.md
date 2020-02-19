@@ -13,11 +13,12 @@ $ npm run start
 
 ### 操作方法
 
-　　「コントラクトを探す」にコントラクトIDを入れてみてください
+「コントラクトを探す」にコントラクトIDを入れてみてください
 
-    サンプル：　Contract4DNFSzRJFvgdau4CW8AM2x7X2AA1q8iX33YNKrBMYAAc
+サンプル：　Contract4DNFSzRJFvgdau4CW8AM2x7X2AA1q8iX33YNKrBMYAAc
 
-    コントラクトがある場合は下に表示されている「探す」のキー、フィールドに値を入れるとストレージが取得できます
+コントラクトがある場合は下に表示されている「探す」のキー、フィールドに値を入れるとストレージが取得できます
+
 サンプル：
 
 - キー lastPerson
