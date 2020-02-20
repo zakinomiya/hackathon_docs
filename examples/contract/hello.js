@@ -3,11 +3,25 @@ class HelloWorld {
     // コントラクトがデプロイされたタイミングで一度だけ呼び出されるinit関数があります
     // ここで最初に設定したい値やストレージの初期化を行えます
     init(){
+        this._put('user', 'たろう')
         this._mapPut('country', 'japan', [])
     }
 
     can_update(data) {
         return blockchain.requireAuth(blockchain.contractOwner(), "active")
+    }
+
+    getUser(){
+        return storage.get('user')
+    }
+
+    /**
+     * 
+     * @param {string} user 
+     */
+
+    changeUser(user){
+        storage.put('user', user)
     }
 
     /**
