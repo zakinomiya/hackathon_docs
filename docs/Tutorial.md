@@ -1,5 +1,11 @@
 # IOSTスマートコントラクトチュートリアル
 
+サンプルコードは
+
+examples/contract/tutorial.js
+
+にあります
+
 ## IOSTのスマートコントラクトについて
 
 スマートコントラクトとは・・・
@@ -341,10 +347,10 @@ const user2 = storage.mapGet('user', 'user2')
 ### ユーザー操作を更新する
 
 ```javascript
-    getUserName(userId){
+    getUserName(accountName){
         // ユーザーを取ってくる
         // 文字列からパース
-        const userInfo = this._mapGet('user', userId)
+        const userInfo = this._mapGet('user', accountName)
 
         // ユーザーがいなければリターン
         if(!userInfo) {
@@ -354,10 +360,10 @@ const user2 = storage.mapGet('user', 'user2')
         return userInfo.name
     }
 
-    getUserAge(userId){
+    getUserAge(){
         // ユーザーを取ってくる
         // 文字列からパース
-        const userInfo = this._mapGet('user', userId)
+        const userInfo = this._mapGet('user', accountName)
 
         // ユーザーがいなければリターン
         if(!userInfo) {
@@ -368,8 +374,10 @@ const user2 = storage.mapGet('user', 'user2')
     }
 
 
-    setUser(userId, userName, userAge){
-        if(storage.mapHas('user', userId)){
+    setUser(userName, userAge){
+        const accountName = tx.publisher
+
+        if(storage.mapHas('user', accountName)){
             throw new Error("user already exists")
         }
 
@@ -380,6 +388,56 @@ const user2 = storage.mapGet('user', 'user2')
         }
         // 文字列化する
         // ストレージにしまう
-        this._mapPut('user', userId, userInfo)
+        this._mapPut('user', accountName, userInfo)
     }
 ```
+
+## 関数に認証をつける
+
+関数を呼ぶのに認証が必要なようにできます
+
+使うAPIは
+
+blockchain.requireAuth(account, permission)
+
+```javascript
+
+    // account1のactiveという名前のパーミッションが必要
+    const isAuthorized = blockchain.requireAuth('account1', 'active');
+    if (isAuthorized !== true) {
+        throw new Error("permissino denied!");
+    }
+```
+
+## ユーザー情報を変更する関数に認証をかける
+
+```javascript
+    changeUserName(accountName, newName){
+        // 認証チェック
+        const isAuthorized = blockchain.requireAuth(accountName, 'active');
+        if (isAuthorized !== true) {
+            throw new Error("permission denied!");
+        }
+
+        // ユーザー情報を取得
+        const userInfo = this._mapGet('user', accountName)
+
+        // いなければエラー
+        if(!userInfo){
+            throw new Error("user not found")
+        }
+
+        // 新しい名前をセット
+        userInfo.name = newName
+
+        // 更新後のユーザーをストレージに保存
+        this._mapPut('user', accountName, userInfo)
+    }
+```
+
+あとは適当にいじってみてください
+
+## 追加情報
+
+[スマートコントラクトAPI一覧](https://developers.iost.io/docs/en/3-smart-contract/IOST-Blockchain-API.html)
+

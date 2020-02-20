@@ -57,7 +57,7 @@ withdraw　→　コントラクトからトークンを引き出す
 
 ```javascript
 
-    const publisher = tx.publisher()
+    const publisher = tx.publisher
     // publisher = 'account1'
 ```
 
@@ -105,7 +105,7 @@ if (isAuthorized !== true) {
 
 ## 現在のブロック情報を確認したい
 
-スマートコントラクトではグローバルでblock変数を参照できます
+スマートコントラクトではグローバルでblockオブジェクトを参照できます
 内容は以下です
 
 ```javascript
