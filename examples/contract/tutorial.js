@@ -39,13 +39,12 @@ class Tutorial {
 
     /**
      * 
-     * @param {string} userId 
      * @param {string} userName 
      * @param {number} userAge 
      */
-    setUser(userId, userName, userAge){
-        if(storage.mapHas('user', userId)){
-            throw new Error("user already exists")
+    setUser(userName, userAge){
+        if(storage.mapHas('user', tx.publisher)){
+            throw new Error("you already registered")
         }
 
         // ユーザー情報
@@ -55,7 +54,35 @@ class Tutorial {
         }
         // 文字列化する
         // ストレージにしまう
-        this._mapPut('user', userId, userInfo)
+        this._mapPut('user', tx.publisher, userInfo)
+    }
+
+
+    /**
+     * 
+     * @param {string} accountName 
+     * @param {string} newName 
+     */
+    changeUserName(accountName, newName){
+        // 認証チェック
+        const isAuthorized = blockchain.requireAuth(accountName, 'active');
+        if (isAuthorized !== true) {
+            throw new Error("permission denied!");
+        }
+
+        // ユーザー情報を取得
+        const userInfo = this._mapGet('user', accountName)
+
+        // いなければエラー
+        if(!userInfo){
+            throw new Error("user not found")
+        }
+
+        // 新しい名前をセット
+        userInfo.name = newName
+
+        // 更新後のユーザーをストレージに保存
+        this._mapPut('user', accountName, userInfo)
     }
 
     //文字列化して保存

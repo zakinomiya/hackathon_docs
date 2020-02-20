@@ -1,0 +1,40 @@
+{
+    "lang": "javascript",
+    "version": "1.0.0",
+    "abi": [
+        {
+            "name": "getUserName",
+            "args": [
+                "string"
+            ],
+            "amountLimit": [],
+            "description": ""
+        },
+        {
+            "name": "getUserAge",
+            "args": [
+                "string"
+            ],
+            "amountLimit": [],
+            "description": ""
+        },
+        {
+            "name": "setUser",
+            "args": [
+                "string",
+                "number"
+            ],
+            "amountLimit": [],
+            "description": ""
+        },
+        {
+            "name": "changeUserName",
+            "args": [
+                "string",
+                "string"
+            ],
+            "amountLimit": [],
+            "description": ""
+        }
+    ]
+}
